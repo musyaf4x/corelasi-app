@@ -11,7 +11,16 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        // Daftarkan middleware alias sesuai SDD: role-based access control
+        $middleware->alias([
+            'role'         => \App\Http\Middleware\RoleMiddleware::class,
+            'check.active' => \App\Http\Middleware\CheckActiveMiddleware::class,
+            'auth.basic'   => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+            'auth.session' => \Illuminate\Auth\Middleware\AuthenticateSession::class,
+            'auth.verified'=> \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+            'throttle'     => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+            'verified'     => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

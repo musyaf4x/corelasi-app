@@ -5,9 +5,37 @@ Repository aplikasi CORELASI.
 ## Baseline stack
 - Laravel 11
 - PHP 8.3
-- Blade + Tailwind CSS + JavaScript ringan / Alpine.js
-- MySQL 8 atau MariaDB
-- Nginx + PHP-FPM
+- Laravel Breeze (Blade auth scaffolding)
+- Tailwind CSS + Alpine.js
+- MySQL 8 atau MariaDB untuk target utama
+- SQLite untuk bootstrap lokal cepat
+
+## Yang sudah siap di baseline ini
+- skeleton Laravel 11
+- auth UI + flow dasar dari Breeze
+- asset pipeline Vite + Tailwind
+- migration default Laravel sudah jalan
+- struktur repo untuk mulai pembagian kerja backend, frontend, dan QA
+
+## Quick start lokal
+1. Install dependency backend
+   - `composer install`
+2. Siapkan environment
+   - `cp .env.example .env`
+   - `php artisan key:generate`
+3. Pilih database
+   - cepat: pakai SQLite
+     - `touch database/database.sqlite`
+     - pastikan `.env` memakai `DB_CONNECTION=sqlite`
+   - target tim: pakai MySQL/MariaDB
+     - ubah `DB_CONNECTION`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`
+4. Jalankan migration
+   - `php artisan migrate`
+5. Install dependency frontend
+   - `npm install`
+6. Jalankan development server
+   - `composer run dev`
+   - atau pisah: `php artisan serve` dan `npm run dev`
 
 ## Working model
 - GitHub = source of truth untuk code
@@ -17,7 +45,16 @@ Repository aplikasi CORELASI.
 
 ## Branch strategy
 - `main` = stable branch
-- feature branches singkat
+- feature branch singkat per task / subtask
+- buka PR kecil, jangan menumpuk perubahan besar di lokal
+
+## Dokumen kerja tim
+- `docs/team-working-model.md`
+- `docs/implementation-kickoff-guide.md`
+- `docs/pre-bootstrap-task-clarity.md`
+- `docs/pbi-01-auth-lane-notes.md`
+- `docs/development-workflow.md`
+- `docs/jira-team-sop.md`
 
 ## Current platform foundation issues
 - `CLS-26` Bootstrap GitHub repo & branch workflow

@@ -76,11 +76,11 @@ class LoginController extends Controller
      */
     private function redirectByRole(string $role)
     {
-        return match($role) {
-            'admin'  => redirect()->intended(route('admin.dashboard')),
-            'guru'   => redirect()->intended(route('teacher.dashboard')),
-            'siswa'  => redirect()->intended(route('student.dashboard')),
-            default  => redirect('/'),
+        return match ($role) {
+            'admin' => redirect()->intended(route('admin.dashboard')),
+            'guru' => redirect()->intended(route('teacher.dashboard')),
+            'siswa' => redirect()->intended(route('student.dashboard')),
+            default => redirect('/'),
         };
     }
 }

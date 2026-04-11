@@ -1,0 +1,24 @@
+[1mdiff --git a/resources/views/auth/confirm-password.blade.php b/resources/views/auth/confirm-password.blade.php[m
+[1mindex 3d38186..3782b74 100644[m
+[1m--- a/resources/views/auth/confirm-password.blade.php[m
+[1m+++ b/resources/views/auth/confirm-password.blade.php[m
+[36m@@ -10,10 +10,8 @@[m
+         <div>[m
+             <x-input-label for="password" :value="__('Password')" />[m
+ [m
+[31m-            <x-text-input id="password" class="block mt-1 w-full"[m
+[31m-                            type="password"[m
+[31m-                            name="password"[m
+[31m-                            required autocomplete="current-password" />[m
+[32m+[m[32m            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required[m
+[32m+[m[32m                autocomplete="current-password" />[m
+ [m
+             <x-input-error :messages="$errors->get('password')" class="mt-2" />[m
+         </div>[m
+[36m@@ -24,4 +22,4 @@[m
+             </x-primary-button>[m
+         </div>[m
+     </form>[m
+[31m-</x-guest-layout>[m
+[32m+[m[32m</x-guest-layout>[m
+\ No newline at end of file[m

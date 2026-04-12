@@ -97,15 +97,17 @@
                             type="password" name="password" placeholder="........" required
                             autocomplete="current-password" />
 
-                        <div
+                        <!-- Toggle Password Icon -->
+                        <div onclick="togglePassword()"
                             class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-gray-400 hover:text-gray-600">
                             @if($errors->any())
-                                <svg class="h-5 w-5 text-[#EF4444]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg id="eye-icon" class="h-5 w-5 text-[#EF4444]" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M6 18L18 6M6 6l12 12"></path>
                                 </svg>
                             @else
-                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg id="eye-icon" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -113,8 +115,32 @@
                                     </path>
                                 </svg>
                             @endif
+                            <svg id="eye-off-icon" class="h-5 w-5 hidden" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21">
+                                </path>
+                            </svg>
                         </div>
                     </div>
+
+                    <script>
+                        function togglePassword() {
+                            const pwInput = document.getElementById('password');
+                            const eyeIcon = document.getElementById('eye-icon');
+                            const eyeOffIcon = document.getElementById('eye-off-icon');
+
+                            if (pwInput.type === 'password') {
+                                pwInput.type = 'text';
+                                eyeIcon.classList.add('hidden');
+                                eyeOffIcon.classList.remove('hidden');
+                            } else {
+                                pwInput.type = 'password';
+                                eyeIcon.classList.remove('hidden');
+                                eyeOffIcon.classList.add('hidden');
+                            }
+                        }
+                    </script>
                     @if($errors->any())
                         <div class="mt-2 text-[#EF4444] text-xs flex items-start gap-1">
                             <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -122,8 +148,7 @@
                                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                             <span><span class="font-semibold">Kata Sandi yang kamu masukkan salah</span><br><span
-                                    class="text-[#94A3B8]">Silahkan cek kembali atau <a
-                                        href="{{ route('password.request') }}"
+                                    class="text-[#94A3B8]">Silahkan cek kembali atau <a href="#"
                                         class="text-[#2E7D32] hover:underline font-semibold">klik "Lupa Kata
                                         Sandi"</a></span></span>
                         </div>

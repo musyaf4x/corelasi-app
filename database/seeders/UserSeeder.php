@@ -27,5 +27,13 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password123'),
             'role' => 'guru',
         ]);
+
+        User::create([
+            'nomor_induk' => 'SISWA001',
+            'name' => 'Rayhan',
+            'email' => 'siswa@corelasi.com',
+            'password' => Hash::make('password123'),
+            'role' => 'siswa',
+        ]);
     }
 }

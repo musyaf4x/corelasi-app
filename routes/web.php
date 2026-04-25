@@ -103,3 +103,14 @@ Route::middleware(['auth', 'check.active', 'role:siswa'])
         // - Akses materi & kumpulkan tugas (UC08, FR-PMB-03, FR-PMB-04)
         // - Lihat nilai & absensi pribadi
     });
+
+/*
+|--------------------------------------------------------------------------
+| Shared Authenticated Routes (lintas role)
+|--------------------------------------------------------------------------
+| Route yang dapat diakses oleh semua role yang sudah login.
+*/
+Route::middleware(['auth', 'check.active'])->group(function () {
+    Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'show'])
+        ->name('profile.show');
+});

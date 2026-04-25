@@ -113,4 +113,5 @@ Route::middleware(['auth', 'check.active', 'role:siswa'])
 Route::middleware(['auth', 'check.active'])->group(function () {
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'show'])
         ->name('profile.show');
+    Route::put('/password', [App\Http\Controllers\PasswordController::class, 'update'])->name('password.update');
 });

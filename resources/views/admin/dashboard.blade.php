@@ -1,8 +1,3 @@
-@if(isset($user) && $user->primary_role === 'guru')
-    @include('teacher.dashboard')
-@elseif(isset($user) && $user->primary_role === 'siswa')
-    @include('student.dashboard')
-@else
 <x-app-layout>
     <!-- Left Sidebar -->
     <aside class="w-64 bg-white border-r border-[#E2E8F0] min-h-screen flex flex-col fixed left-0 top-0 z-20 shadow-sm">
@@ -534,4 +529,3 @@
         </button>
     </div>
 </x-app-layout>
-@endif

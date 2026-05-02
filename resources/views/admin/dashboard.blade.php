@@ -148,14 +148,37 @@
                 </button>
 
                 <!-- Profile -->
-                <div class="flex items-center gap-3 cursor-pointer">
-                    <div class="text-right flex flex-col justify-center">
-                        <span class="text-sm font-bold text-[#1E293B] leading-tight">Admin</span>
-                        <span class="text-xs text-[#94A3B8]">Superuser Access</span>
+                <div class="relative" x-data="{ open: false }" @click.away="open = false">
+                    <div class="flex items-center gap-3 cursor-pointer" @click="open = !open">
+                        <div class="text-right flex flex-col justify-center">
+                            <span class="text-sm font-bold text-[#1E293B] leading-tight">{{ $user->name ?? 'Admin' }}</span>
+                            <span class="text-xs text-[#94A3B8]">{{ isset($user) ? ucfirst($user->primary_role) : 'Superuser Access' }}</span>
+                        </div>
+                        <div class="w-9 h-9 rounded-full bg-gray-200 border border-gray-300 overflow-hidden">
+                            <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name ?? 'Admin') }}&background=1E293B&color=fff" alt="{{ $user->name ?? 'Admin' }}"
+                                class="w-full h-full object-cover">
+                        </div>
                     </div>
-                    <div class="w-9 h-9 rounded-full bg-gray-200 border border-gray-300 overflow-hidden">
-                        <img src="https://ui-avatars.com/api/?name=Admin&background=1E293B&color=fff" alt="Admin"
-                            class="w-full h-full object-cover">
+                    
+                    <!-- Dropdown Content -->
+                    <div x-show="open" style="display: none;"
+                         x-transition:enter="transition ease-out duration-100"
+                         x-transition:enter-start="transform opacity-0 scale-95"
+                         x-transition:enter-end="transform opacity-100 scale-100"
+                         x-transition:leave="transition ease-in duration-75"
+                         x-transition:leave-start="transform opacity-100 scale-100"
+                         x-transition:leave-end="transform opacity-0 scale-95"
+                         class="absolute right-0 mt-3 w-48 bg-white border border-[#E2E8F0] shadow-lg rounded-xl py-1.5 z-50">
+                        
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 font-bold flex items-center gap-2 transition-colors">
+                                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                                </svg>
+                                Logout Sistem
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -169,7 +192,7 @@
             <div class="flex-1 flex flex-col min-w-0">
                 <!-- Greeting -->
                 <div class="mb-8">
-                    <h1 class="text-3xl font-bold text-[#1E293B] mb-2 tracking-tight">Selamat Datang, Administrator</h1>
+                    <h1 class="text-3xl font-bold text-[#1E293B] mb-2 tracking-tight">Selamat Datang, {{ $user->name ?? 'Administrator' }}</h1>
                     <p class="text-base text-[#64748B]">Pantau integritas operasional dan aktivitas akademik hari ini.
                     </p>
                 </div>

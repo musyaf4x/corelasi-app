@@ -18,7 +18,6 @@ class DashboardController extends Controller
         // $teacher = $user->teacher;
 
         // if (!$teacher) {
-        //     $todaySchedule = collect([]);
         //     $courses = collect([]);
         // } else {
         //     $todaySchedule = ScheduleSession::with(['subject', 'classroom'])

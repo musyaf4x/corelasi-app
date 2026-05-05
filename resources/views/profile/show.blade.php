@@ -37,7 +37,7 @@
 <!-- Left Sidebar -->
 <aside class="w-64 bg-white border-r border-[#E2E8F0] min-h-screen flex flex-col fixed left-0 top-0 z-20 shadow-sm hidden md:flex">
     <!-- Logo Area -->
-    <div class="p-6 pb-8 border-b-0 border-[#E2E8F0] flex items-center gap-3">
+    <a href="{{ route('dashboard') }}" class="p-6 pb-8 border-b-0 border-[#E2E8F0] flex items-center gap-3 hover:opacity-80 transition-opacity">
         <div class="w-10 h-10 bg-[#2D7336] rounded text-white flex items-center justify-center shadow-sm">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4 10H20V20H4V10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -50,7 +50,7 @@
             <h2 class="text-base font-bold text-[#1E293B] leading-tight">CORELASI</h2>
             <span class="text-[10px] text-[#64748B] tracking-wide uppercase font-semibold">Sistem Operasional</span>
         </div>
-    </div>
+    </a>
 
     <!-- Navigation -->
     <nav class="flex-1 px-4 py-4 space-y-1 overflow-y-auto no-scrollbar">
@@ -266,57 +266,28 @@
             </div>
             @endif
 
-            <!-- Ubah Password Card -->
-            <div class="bg-white rounded-xl shadow-[0_1px_3px_0_rgb(0,0,0,0.02)] border border-[#E2E8F0] p-6 md:p-8">
-                <h2 class="flex items-center gap-2 text-xl font-bold text-[#1E293B] mb-5">
-                    <svg class="w-5 h-5 text-[#1E293B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                    Ubah Password
-                </h2>
-                
-                @if (session('status') === 'password-updated')
-                    <div class="mb-4 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded relative" role="alert">
-                        <span class="block sm:inline">Password berhasil diperbarui.</span>
-                    </div>
-                @endif
-
-                <form method="POST" action="{{ route('password.update') }}" class="space-y-4">
-                    @csrf
-                    @method('PUT')
-
+            <!-- Keamanan Akun Card -->
+            <section class="rounded-2xl border border-[#E2E8F0] bg-white p-6 md:p-8 shadow-[0_1px_3px_0_rgb(0,0,0,0.02)] mb-6">
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                     <div>
-                        <label for="current_password" class="block text-sm font-medium text-[#64748B] mb-1">Password Lama</label>
-                        <input id="current_password" name="current_password" type="password" required
-                               class="w-full rounded-md border-[#E2E8F0] shadow-sm focus:border-[#2D7336] focus:ring focus:ring-[#2D7336] focus:ring-opacity-50"
-                               autocomplete="current-password">
-                        @error('current_password')
-                            <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
-                        @enderror
+                        <h2 class="flex items-center gap-2 text-xl font-bold text-[#1E293B]">
+                            <svg class="w-5 h-5 text-[#1E293B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                            Keamanan Akun
+                        </h2>
+                        <p class="mt-4 text-sm text-[#64748B]">
+                            Kelola kata sandi akun Anda untuk menjaga keamanan akses CORELASI.
+                        </p>
+                        <p class="mt-1 text-xs text-slate-500">
+                            Gunakan password yang kuat dan jangan bagikan kepada orang lain.
+                        </p>
                     </div>
 
-                    <div>
-                        <label for="password" class="block text-sm font-medium text-[#64748B] mb-1">Password Baru</label>
-                        <input id="password" name="password" type="password" required
-                               class="w-full rounded-md border-[#E2E8F0] shadow-sm focus:border-[#2D7336] focus:ring focus:ring-[#2D7336] focus:ring-opacity-50"
-                               autocomplete="new-password">
-                        @error('password')
-                            <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div>
-                        <label for="password_confirmation" class="block text-sm font-medium text-[#64748B] mb-1">Konfirmasi Password Baru</label>
-                        <input id="password_confirmation" name="password_confirmation" type="password" required
-                               class="w-full rounded-md border-[#E2E8F0] shadow-sm focus:border-[#2D7336] focus:ring focus:ring-[#2D7336] focus:ring-opacity-50"
-                               autocomplete="new-password">
-                    </div>
-
-                    <div class="pt-2">
-                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-[#2D7336] border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-[#235c2b] focus:bg-[#235c2b] active:bg-[#1a4420] focus:outline-none focus:ring-2 focus:ring-[#2D7336] focus:ring-offset-2 transition ease-in-out duration-150">
-                            Simpan Password
-                        </button>
-                    </div>
-                </form>
-            </div>
+                    <a href="{{ route('password.edit') }}"
+                       class="inline-flex items-center justify-center rounded-lg bg-[#2D7336] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[#235c2b] focus:outline-none focus:ring-2 focus:ring-[#2D7336] focus:ring-offset-2 mt-2 sm:mt-0">
+                        Ubah Password
+                    </a>
+                </div>
+            </section>
         </div>
     </main>
 </div>

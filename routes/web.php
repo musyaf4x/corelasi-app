@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\NewPasswordController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +42,16 @@ Route::get('/dashboard', function () {
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
+
+    // Guest Password Reset (Breeze)
+    Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
+        ->name('password.request');
+    Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
+        ->name('password.email');
+    Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])
+        ->name('password.reset');
+    Route::post('/reset-password', [NewPasswordController::class, 'store'])
+        ->name('password.store');
 });
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
@@ -114,4 +126,7 @@ Route::middleware(['auth', 'check.active'])->group(function () {
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'show'])
         ->name('profile.show');
     Route::put('/password', [App\Http\Controllers\PasswordController::class, 'update'])->name('password.update');
+    Route::get('/profile/change-password', function () {
+        return view('profile.change-password');
+    })->name('password.edit');
 });

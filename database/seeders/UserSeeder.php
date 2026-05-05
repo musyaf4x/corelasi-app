@@ -27,5 +27,14 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password123'),
             'role' => 'guru',
         ]);
+
+        // Buat contoh Siswa untuk testing tim
+        User::create([
+            'nomor_induk' => 'SISWA001',
+            'name' => 'Contoh Siswa Corelasi',
+            'email' => 'siswa@corelasi.com',
+            'password' => Hash::make('password123'),
+            'role' => 'siswa',
+        ]);
     }
 }

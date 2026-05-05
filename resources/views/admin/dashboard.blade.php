@@ -2,7 +2,7 @@
     <!-- Left Sidebar -->
     <aside class="w-64 bg-white border-r border-[#E2E8F0] min-h-screen flex flex-col fixed left-0 top-0 z-20 shadow-sm">
         <!-- Logo Area -->
-        <div class="p-6 pb-8 border-b-0 border-[#E2E8F0] flex items-center gap-3">
+        <a href="{{ route('admin.dashboard') }}" class="p-6 pb-8 border-b-0 border-[#E2E8F0] flex items-center gap-3 hover:opacity-80 transition-opacity">
             <div class="w-10 h-10 bg-[#2D7336] rounded text-white flex items-center justify-center shadow-sm">
                 <!-- Icon Bank/School -->
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -17,7 +17,7 @@
                 <h2 class="text-base font-bold text-[#1E293B] leading-tight">CORELASI</h2>
                 <span class="text-[10px] text-[#64748B] tracking-wide uppercase font-semibold">Sistem Operasional</span>
             </div>
-        </div>
+        </a>
 
         <!-- Navigation -->
         <nav class="flex-1 px-4 py-4 space-y-1 overflow-y-auto no-scrollbar">
@@ -169,6 +169,15 @@
                          x-transition:leave-start="transform opacity-100 scale-100"
                          x-transition:leave-end="transform opacity-0 scale-95"
                          class="absolute right-0 mt-3 w-48 bg-white border border-[#E2E8F0] shadow-lg rounded-xl py-1.5 z-50">
+                        
+                        <a href="{{ route('profile.show') }}" class="w-full text-left px-4 py-2.5 text-sm text-[#1E293B] hover:bg-gray-50 font-bold flex items-center gap-2 transition-colors">
+                            <svg class="w-4 h-4 flex-shrink-0 text-[#64748B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                            Profil Pengguna
+                        </a>
+                        
+                        <div class="h-px bg-[#E2E8F0] my-1"></div>
                         
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

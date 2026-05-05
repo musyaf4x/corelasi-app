@@ -63,3 +63,15 @@ Route::middleware(['auth', 'check.active', 'role:siswa'])
         Route::get('/dashboard', [App\Http\Controllers\Student\DashboardController::class, 'index'])
             ->name('dashboard');
     });
+
+/*
+|--------------------------------------------------------------------------
+| Shared Authenticated Routes (lintas role)
+|--------------------------------------------------------------------------
+| Route yang dapat diakses oleh semua role yang sudah login.
+*/
+Route::middleware(['auth', 'check.active'])->group(function () {
+    Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'show'])
+        ->name('profile.show');
+    Route::put('/password', [App\Http\Controllers\PasswordController::class, 'update'])->name('password.update');
+});

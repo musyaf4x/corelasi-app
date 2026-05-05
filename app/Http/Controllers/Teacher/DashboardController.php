@@ -79,7 +79,7 @@ class DashboardController extends Controller
             $greeting = 'Selamat Malam';
         }
 
-        return view('dashboard', compact('greeting', 'user'));
+        return view('teacher.dashboard', compact('greeting', 'user'));
     }
 
     public function courses()
@@ -108,6 +108,6 @@ class DashboardController extends Controller
         // }
 
         // return view('pages.teacher.courses', compact('courses'));
-        return view('dashboard', compact('user'));
+        return view('teacher.dashboard', compact('user'));
     }
 }

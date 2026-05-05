@@ -148,7 +148,8 @@
                                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                             <span><span class="font-semibold">Kata Sandi yang kamu masukkan salah</span><br><span
-                                    class="text-[#94A3B8]">Silahkan cek kembali atau <a href="#"
+                                    class="text-[#94A3B8]">Silahkan cek kembali atau <a
+                                        href="{{ route('forgot-password') }}"
                                         class="text-[#2E7D32] hover:underline font-semibold">klik "Lupa Kata
                                         Sandi"</a></span></span>
                         </div>

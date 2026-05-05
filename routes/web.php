@@ -64,6 +64,15 @@ Route::middleware(['auth', 'check.active', 'role:siswa'])
             ->name('dashboard');
     });
 
+Route::get('/forgot-password', function () {
+    return view("auth.forgot-password");
+})->name("forgot-password");
+
+Route::get('/reset-password', function () {
+    return view("auth.reset-password");
+})->name("reset-password");
+
+
 /*
 |--------------------------------------------------------------------------
 | Shared Authenticated Routes (lintas role)
@@ -75,3 +84,4 @@ Route::middleware(['auth', 'check.active'])->group(function () {
         ->name('profile.show');
     Route::put('/password', [App\Http\Controllers\PasswordController::class, 'update'])->name('password.update');
 });
+

@@ -1,4 +1,4 @@
-@extends('profile.show')
+@extends('layouts.authenticated')
 
 @section('content')
 <div class="w-full">

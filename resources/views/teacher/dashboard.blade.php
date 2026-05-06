@@ -1,4 +1,4 @@
-@extends('profile.show')
+@extends('layouts.authenticated')
 
 @section('content')
 <div class="flex-1 flex flex-col items-center justify-center w-full min-h-[60vh]">

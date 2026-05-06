@@ -2,100 +2,13 @@
     @include('teacher.dashboard')
 @elseif(isset($user) && $user->primary_role === 'siswa')
     @include('student.dashboard')
-@else
-    @include('profile.show')
-    <x-app-layout>
+@@else
+    @extends('layouts.authenticated')
 
-        <!-- Main Content Area -->
-        <div class="ml-64 flex-1 flex flex-col min-h-screen relative w-full">
-            <!-- Top Navigation Header -->
-            <header
-                class="h-16 border-b border-[#E2E8F0] bg-[#F8FAFC]/80 backdrop-blur top-0 z-10 flex items-center justify-between px-8 absolute w-full">
-                <!-- Left: Semester Info -->
-                <div>
-                    <button
-                        class="flex items-center gap-2 bg-gray-100/80 hover:bg-gray-200/80 text-gray-700 py-1.5 px-3 rounded-full text-sm font-medium transition-colors border border-gray-200">
-                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                            </path>
-                        </svg>
-                        Semester Ganjil 2023/2024
-                    </button>
-                </div>
-
-                <!-- Right: Profile & Notifications -->
-                <div class="flex items-center gap-6">
-                    <!-- Notifications -->
-                    <button class="relative text-gray-400 hover:text-gray-600 transition-colors">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
-                            </path>
-                        </svg>
-                        <!-- notification dot if any -->
-                    </button>
-
-                    <!-- Profile -->
-                    <div class="relative" x-data="{ open: false }" @click.away="open = false">
-                        <div class="flex items-center gap-3 cursor-pointer" @click="open = !open">
-                            <div class="text-right flex flex-col justify-center">
-                                <span
-                                    class="text-sm font-bold text-[#1E293B] leading-tight">{{ $user->name ?? 'Admin' }}</span>
-                                <span
-                                    class="text-xs text-[#94A3B8]">{{ isset($user) ? ucfirst($user->primary_role) : 'Superuser Access' }}</span>
-                            </div>
-                            <div class="w-9 h-9 rounded-full bg-gray-200 border border-gray-300 overflow-hidden">
-                                <!-- <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name ?? 'Admin') }}&background=1E293B&color=fff" alt="{{ $user->name ?? 'Admin' }}"
-                                                                    class="w-full h-full object-cover"> -->
-                            </div>
-                        </div>
-
-                        <!-- Dropdown Content -->
-                        <div x-show="open" style="display: none;" x-transition:enter="transition ease-out duration-100"
-                            x-transition:enter-start="transform opacity-0 scale-95"
-                            x-transition:enter-end="transform opacity-100 scale-100"
-                            x-transition:leave="transition ease-in duration-75"
-                            x-transition:leave-start="transform opacity-100 scale-100"
-                            x-transition:leave-end="transform opacity-0 scale-95"
-                            class="absolute right-0 mt-3 w-48 bg-white border border-[#E2E8F0] shadow-lg rounded-xl py-1.5 z-50">
-
-                            <a href="{{ route('profile.show') }}"
-                                class="w-full text-left px-4 py-2.5 text-sm text-[#1E293B] hover:bg-gray-50 font-bold flex items-center gap-2 transition-colors">
-                                <svg class="w-4 h-4 flex-shrink-0 text-[#64748B]" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                </svg>
-                                Profil Pengguna
-                            </a>
-
-                            <div class="h-px bg-[#E2E8F0] my-1"></div>
-
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit"
-                                    class="w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 font-bold flex items-center gap-2 transition-colors">
-                                    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
-                                        </path>
-                                    </svg>
-                                    Logout Sistem
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            <!-- Dashboard Content -->
-            <!-- Add pt-24 to account for absolute header -->
-            <main class="flex-1 p-8 pt-24 flex gap-8">
-
-                <!-- Main Content Area (Left Col) -->
-                <div class="flex-1 flex flex-col min-w-0">
+    @section('content')
+        <div class="flex flex-col xl:flex-row gap-8 w-full">
+            <!-- Main Content Area (Left Col) -->
+            <div class="flex-1 flex flex-col min-w-0">
                     <!-- Greeting -->
                     <div class="mb-8">
                         <h1 class="text-3xl font-bold text-[#1E293B] mb-2 tracking-tight">Selamat Datang,
@@ -426,15 +339,12 @@
                     </div>
 
                 </div>
-            </main>
-
             <!-- FAB Floating Button bottom right (like the green + icon in image) -->
-            <button
-                class="fixed bottom-8 right-8 w-14 h-14 bg-[#2D7336] hover:bg-[#1E5725] text-white rounded-full shadow-lg flex items-center justify-center focus:outline-none transition-transform hover:scale-105 z-20">
+            <button class="fixed bottom-8 right-8 w-14 h-14 bg-[#2D7336] hover:bg-[#1E5725] text-white rounded-full shadow-lg flex items-center justify-center focus:outline-none transition-transform hover:scale-105 z-20">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                 </svg>
             </button>
         </div>
-    </x-app-layout>
+    @endsection
 @endif

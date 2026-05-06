@@ -66,6 +66,12 @@ Route::middleware(['auth', 'check.active', 'role:guru'])
             ->name('dashboard');
         Route::get('/courses', [App\Http\Controllers\Teacher\DashboardController::class, 'courses'])
             ->name('courses');
+        Route::get('/materi-tugas', function () {
+            return view('teacher.feature.materi-tugas', ['user' => Auth::user()]);
+        })->name('materi-tugas');
+        Route::get('/materi-tugas/detail', function () {
+            return view('teacher.feature.materi-tugas-detail', ['user' => Auth::user()]);
+        })->name('materi-tugas.detail');
 
     });
 Route::middleware(['auth', 'check.active', 'role:siswa'])
